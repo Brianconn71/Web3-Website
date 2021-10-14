@@ -88,16 +88,33 @@ class App extends Component {
 
                 <div className="row">
                   <div className="col-lg-12 mt-3">
-                    <div className="bg-light pt-4 pb-3 m-1">
-                      <h5>Latest Blocks</h5>
+                    <div className="card">
+                      <div className="card-header">
+                        <h5>Latest Blocks</h5>
+                      </div>
                     </div>
                     <div className="card-body">
                       <table className="table">
                         <thead>
                           <tr>
-                            <th scope="col"></th>
+                            <th scope="col">#</th>
+                            <th scope="col">Hash</th>
+                            <th scope="col">Miner</th>
+                            <th scope="col">Timestamp</th>
                           </tr>
                         </thead>
+                        <tbody>
+                          {this.state.latestBlocks.map((block, key) =>{
+                            return (
+                              <tr key={key}>
+                                <th scope="row">{block.number}</th>
+                                <td>{block.hash.substring(0,20)}...</td>
+                                <td>{block.miner.substring(0,20)}...</td>
+                                <td>{block.timestamp}</td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
                       </table>
                     </div>
                   </div>
