@@ -4,6 +4,28 @@ import './App.css';
 import Web3 from 'web3';
 
 class App extends Component {
+  async componentWillMount(){
+    let web3 = new Web3("https://mainnet.infura.io/v3/356f0b7cc76a469ba6a981f0bc2e45ad")
+    let latestBlock = await web3.eth.getBlock('latest')
+    console.log('Latest Block', latestBlock)
+    this.setState({
+      blockNumber: latestBlock.blockNumber,
+      difficulty: latestBlock.difficulty,
+    })
+    let gasPrice = await web3.eth.getGasPrice()
+    console.log(gasPrice)
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = { 
+      blockNumber: 0,
+      difficulty: 0,
+      gasPrice: 0,
+      latestBlocks: []
+    };
+  }
+
   render() {
     return (
       <div>
